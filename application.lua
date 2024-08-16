@@ -28,6 +28,14 @@ App.new = function()
     self.best = 0
     self.onStart = function()
         self.game.init()
+
+        io.write("3 match game")
+        io.write("commands:\n")
+        io.write("q - quit the game\n")
+        io.write("m x y d - move the gem with (x, y) coordinates to d direction.\n          d can be l (left) r (right) u (up) d (down) for example:\n          m 5 3 r\n")
+        io.write("press enter to start...")
+        local unused = io.read("*l")
+
         local file = io.open("best.txt", "r")
         if not file then return end
 
@@ -38,8 +46,9 @@ App.new = function()
     self.onExit = function()
         if self.game.getScore() > self.best then
             self.best = self.game.getScore()
+            io.write("new best! congratulations!\n")
         end
-        print("ypur best: " .. self.best)
+        print("your best: " .. self.best)
         
         local file = io.open("best.txt", "w")
         if file then file:write(self.best) end
