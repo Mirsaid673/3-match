@@ -29,7 +29,7 @@ App.new = function()
     self.onStart = function()
         self.game.init()
 
-        io.write("3 match game")
+        io.write("match 3 game")
         io.write("commands:\n")
         io.write("q - quit the game\n")
         io.write("m x y d - move the gem with (x, y) coordinates to d direction.\n          d can be l (left) r (right) u (up) d (down) for example:\n          m 5 3 r\n")
