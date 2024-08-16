@@ -1,19 +1,24 @@
 require "screen"
 require "game"
+require "input"
 
 
-local screen = Screen.new(12, 12)
+local screen = Screen.new(12, 13)
+local input = Input.new()
 local game = Game.new(screen)
+
 game.init()
-local running = true
-while running do
+
+while not input.shouldClose() do
     screen.clearConsole()
 
+    if input.isCorrect() then
+        game.move(input.getSwapPints())
+    end
+    
     game.dump()
     screen.draw()
-    
-    local s = io.read("*n")
-    if s == 1 then
-        running = false
-    end
+    input.update()
 end
+
+print("your score: " .. game.getScore())
