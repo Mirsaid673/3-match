@@ -163,7 +163,7 @@ Game.new = function(screen_)
 
         for y = 1, height do
             for x = 1, width do
-                screen.put(x + offsetX, y + offsetY, intToGems[self.get(x, y)])
+                screen.putColored(x + offsetX, y + offsetY, intToGems[self.get(x, y)], self.get(x, y))
             end
         end
     end

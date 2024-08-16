@@ -1,13 +1,17 @@
 Screen = {}
 
-local color = require 'libs.ansicolors'
-print(color.red 'hello')
+local colors = require 'libs.ansicolors'
 
 Screen.new = function(w, h)
     local self = setmetatable({}, Screen)
     local buffer = {}
     local width = w
     local height = h
+
+    local colored = function (color, text)
+        local toColor = {"red", "green", "yellow", "blue", "magenta", "cyan"}
+        return colors("%{" .. toColor[color] .. "}" .. text)
+    end
 
     self.draw = function()
         for i = 1, height do
@@ -23,6 +27,11 @@ Screen.new = function(w, h)
     self.put = function(x, y, val)
         if x > width or x < 1 or y > height or y < 1 then return end
         buffer[y][x] = val
+    end
+
+    self.putColored = function(x, y, val, color)
+        if x > width or x < 1 or y > height or y < 1 then return end
+        buffer[y][x] = colored(color, val)
     end
 
     self.get = function(x, y)
