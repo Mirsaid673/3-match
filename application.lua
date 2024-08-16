@@ -25,11 +25,25 @@ App.new = function()
 
     end
 
-    self.onStart = function() 
+    self.best = 0
+    self.onStart = function()
         self.game.init()
+        local file = io.open("best.txt", "r")
+        if not file then return end
+
+        self.best = file:read("n")
+        if not self.best then self.best = 0 end
     end
 
-    self.onExit = function() end
+    self.onExit = function()
+        if self.game.getScore() > self.best then
+            self.best = self.game.getScore()
+        end
+        print("ypur best: " .. self.best)
+        
+        local file = io.open("best.txt", "w")
+        if file then file:write(self.best) end
+    end
 
     self.run = function()
         self.onStart()

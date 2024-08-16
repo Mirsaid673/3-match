@@ -1,5 +1,8 @@
 Screen = {}
 
+local color = require 'libs.ansicolors'
+print(color.red 'hello')
+
 Screen.new = function(w, h)
     local self = setmetatable({}, Screen)
     local buffer = {}
